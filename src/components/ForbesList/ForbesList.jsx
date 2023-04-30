@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ForbesListItem } from 'components';
 import {
   BoardHeader,
@@ -8,6 +9,35 @@ import {
   LeaderBoardProfiles,
 } from './ForbesList.styled';
 
-export const ForbesList = () => {
-  return <div>ForbesList</div>;
+export const ForbesList = ({ list }) => {
+  return (
+    <LeaderBoard>
+      <BoardHeader>
+        <BoardTitle>
+          <TitleTop>Forbes</TitleTop>
+          <TitleBottom>Leader board</TitleBottom>
+        </BoardTitle>
+      </BoardHeader>
+
+      <LeaderBoardProfiles>
+        {list.map(item => (
+          <ForbesListItem
+            key={item.id}
+            name={item.name}
+            capital={item.capital}
+            avatar={item.avatar}
+            isIncrease={item.isIncrease}
+          />
+        ))}
+      </LeaderBoardProfiles>
+    </LeaderBoard>
+  );
+};
+
+ForbesList.propTypes = {
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  ),
 };
