@@ -1,5 +1,7 @@
+import { format } from 'date-fns';
 import PropTypes from 'prop-types';
 import { BaseTable, THead, Th, Tr, Td } from './CryptoHistory.styled';
+
 
 export const CryptoHistory = ({list}) => {
   return <BaseTable>
@@ -16,8 +18,8 @@ export const CryptoHistory = ({list}) => {
       {list.map(({id,price,amount,date},index) => <Tr key={id}>
       <Td>{index+1}</Td>
       <Td>{price}</Td>
-        <Td>{amount}</Td>
-        <Td>{date}</Td>
+      <Td>{amount}</Td>
+      <Td>{format(new Date(date), 'yyyy-MM-dd, h:mm a')}</Td>
     </Tr>)}
    
    
@@ -28,12 +30,11 @@ export const CryptoHistory = ({list}) => {
 
 CryptoHistory.propTypes = {
   list: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
+  PropTypes.shape({
+  id: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
-      amound: PropTypes.number.isRequired,
- date: PropTypes.string.isRequired,
+  amount: PropTypes.number.isRequired,
+  date: PropTypes.string.isRequired,
     }),
   ),
 };
-
